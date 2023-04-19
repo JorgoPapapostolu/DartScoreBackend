@@ -1,13 +1,20 @@
 import express, { Application, Request, Response } from "express";
+import { router } from './routes/users';
 const app: Application = express();
+
+import pool from "./configs/db";
+
+pool.connect((err) => { // Connection Check
+  if (err) {
+    console.log(err);
+  } else {
+    console.log("Data logging initiated!");
+  }
+});
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-
-app.get("/", (req: Request, res: Response) => {
-    res.send('Test-Test');
-  });
-
+app.use("/user", router);
 
 export default app;
