@@ -1,5 +1,7 @@
 import express, { Application, Request, Response } from "express";
 import { router } from './routes/users';
+import cors from 'cors';
+
 const app: Application = express();
 
 import pool from "./configs/db";
@@ -12,6 +14,7 @@ pool.connect((err) => { // Connection Check
   }
 });
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
